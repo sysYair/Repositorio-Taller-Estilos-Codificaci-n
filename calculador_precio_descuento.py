@@ -1,18 +1,25 @@
-def calcular_precio_con_descuento(precio, porcentaje_descuento):
-    
-    # Validar que los valores sean correctos
-    if precio < 0 or porcentaje_descuento < 0:
-        return "Valores inválidos"
+def calcular_precio_final(precio, porcentaje_descuento, impuesto=0):
+   
+    # Validaciones
+    if precio < 0:
+        return "El precio no puede ser negativo"
+    if porcentaje_descuento < 0 or porcentaje_descuento > 100:
+        return "Descuento inválido"
+    if impuesto < 0:
+        return "Impuesto inválido"
 
-    # Calcular descuento
+    # Cálculo del descuento
     descuento = precio * (porcentaje_descuento / 100)
+    precio_con_descuento = precio - descuento
 
-    # Calcular precio final
-    precio_final = precio - descuento
+    # Cálculo del impuesto
+    valor_impuesto = precio_con_descuento * (impuesto / 100)
+    precio_final = precio_con_descuento + valor_impuesto
 
-    return precio_final
+    # Redondeo a 2 decimales
+    return round(precio_final, 2)
 
 
-# Prueba de la función
-resultado = calcular_precio_con_descuento(100, 20)
+# Prueba
+resultado = calcular_precio_final(100, 20, 19)
 print("Precio final:", resultado)
